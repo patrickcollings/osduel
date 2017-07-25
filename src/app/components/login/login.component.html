@@ -1,0 +1,11 @@
+
+<p>Welcome to OSDuel</p>
+  <button md-raised-button (click)="show = !show">LOGIN</button>
+
+<div [hidden]="!show">
+  <app-home></app-home>
+  <p>USER</p>
+  <p>Rank: {{users.rank}}</p>
+  <p>Total Level: {{users.totalLevel}}</p>
+  <p>Total Xp: {{users.totalXp}}</p>
+</div>
