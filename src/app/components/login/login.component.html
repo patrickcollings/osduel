@@ -1,11 +1,20 @@
 
 <p>Welcome to OSDuel</p>
-  <button md-raised-button (click)="show = !show">LOGIN</button>
 
-<div [hidden]="!show">
-  <app-home></app-home>
-  <p>USER</p>
-  <p>Rank: {{users.rank}}</p>
-  <p>Total Level: {{users.totalLevel}}</p>
-  <p>Total Xp: {{users.totalXp}}</p>
+<div *ngIf="league != null">
+  <h2>Current League:</h2>
+  <div *ngFor="let user of league">
+    <h3>{{ user[0] }} : {{ user[1] }}</h3>
+  </div>
+</div>
+
+
+<button md-raised-button (click)="updateLeague()">Update League</button>
+<hr />
+<input [(ngModel)]="userName" name="inputUser"  />
+<button (click)="addNewUser()">Add User</button>
+
+
+<div *ngIf="updatedDate != null">
+  <p> Last Updated:     {{ updatedDate }} </p>
 </div>

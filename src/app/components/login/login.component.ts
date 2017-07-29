@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgModule } from '@angular/core';
 import { DataService } from '../../services/data.service';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-login',
@@ -8,31 +9,39 @@ import { DataService } from '../../services/data.service';
 })
 export class LoginComponent implements OnInit {
 
-  users: User;
+  userName: string = "Add User Here";
 
-  constructor(private dataService:DataService) {
+  get updatedDate () {
+    return this.dataService.lastUpdate;
+  }
 
-    
-   }
+  get league () {
+    return this.dataService.league;
+  }
 
+
+  constructor(private dataService:DataService) {    
+  }
+
+ 
+  
   ngOnInit() {
-    this.dataService.getUser().subscribe((res) => this.createUser(res));
+    this.dataService.createLeague();
+    this.dataService.getLastUpdate();
   }
 
-  createUser(data) {
-    this.users = new User(data[0], data[1], data[2]);
+  updateLeague() {
+    // Update the league
+    this.dataService.updateLeague();
+    this.dataService.setLastUpdate();
   }
-}
 
-
-export class User {
-  rank:number;
-  totalLevel:number;
-  totalXp:number;
-
-  constructor(rank,totalLevel,totalXp) {
-    this.rank = rank;
-    this.totalLevel = totalLevel;
-    this.totalXp = totalXp;
+  addNewUser() {
+    this.dataService.addUser(this.userName);
+    this.dataService.setLastUpdate();
   }
+
+
+
+
 }
