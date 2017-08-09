@@ -14,8 +14,10 @@ export class DataService implements OnInit {
   public lastUpdate: string;
 
   createLeague() {
-    var url = 'http://localhost/osduel/request.php';
+    var url = 'https://osduel.herokuapp.com/update.php?name=cactildo';
     this.http.get(url).subscribe(res => {
+
+        console.log(res);
         // TODO Error check that response is correct from servers
       
         // Convert response to array
